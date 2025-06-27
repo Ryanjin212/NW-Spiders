@@ -1,6 +1,40 @@
 {
   "spider": "./Spiders-Lib/GM.jar;md5;875ce871703d1c382e0498711b9d3ba0",
   "sites": [
+{"key":"vv001","name":"️💃女優💃","type":4,"api":"https://raw.githubusercontent.com/c120487/00/main/api/00title05151.json","searchable":0,"quickSearch":0,"filterable":0},
+{"key":"vv002","name":"️👠番號👠","type":4,"api":"https://raw.githubusercontent.com/c120487/00/main/api/00title05152.json","searchable":0,"quickSearch":0,"filterable":0},
+{"key":"vv003","name":"️👙主題👙","type":4,"api":"https://raw.githubusercontent.com/c120487/00/main/api/00title05153.json","searchable":0,"quickSearch":0,"filterable":0},
+{"key":"Xojav0","name":"XOJav0","type":3,"api":"csp_Xojav","searchable":1,"quickSearch":1,"changeable":1,"filterable":0,"timeout":60,"ext":"null$$$proxy","style":{"type":"rect","ratio":1.5}},
+{"key":"麻豆社0","name":"麻豆社0","type":3,"api":"./lib/drpy2.min.js","ext":"./js/madouclub.js","style": {
+                "type": "rect",
+                "ratio": 1.777
+            }
+        },
+{"key":"drpy_js_朱古力0","name":"朱古力0","type":3,"api":"./lib/drpy2.min.js","ext":"./js/朱古力.js","style": {
+                "type": "rect",
+                "ratio": 1.777
+            }
+        },
+	
+{"key":"drpy_js_Missav0","name":"MissAV0","type":3,"api":"./lib/drpy2.min.js","ext":"./js/Missav.js","style": {
+                "type": "rect",
+                "ratio": 1.777
+            }
+        },
+	
+{"key":"Jable0","name":"Jable0","type":3,"api":"csp_Jable","searchable":1,"recordable":0,"timeout":60,"style":{"type":"rect","ratio":1.77}},
+
+{"key":"Hanime","name":"Hanime","type":3,"api":"csp_Hanime","searchable":1,"recordable":0,"style":{"type":"rect","ratio":0.68}},
+	{
+            "key": "大奶子资源",
+            "name": "大奶子资源",
+            "type": 1,
+            "api": "https://apidanaizi.com/api.php/provide/vod",
+            "searchable": 1,
+            "changeable": 1
+        },
+
+{"name":"91md91麻豆","key":"1191麻豆","type":1,"api":"https://91md.me/api.php/provide/vod/","searchable":1,"quickSearch":1,"filterable":1},
     {
       "key": "Jable",
       "name": "Jable",
