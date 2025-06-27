@@ -68,7 +68,7 @@
       },
       "api": "csp_GM",
       "ext": {
-        "userScript": "./userScripts/jable.user.js",
+        "userScript": "./userScripts/madou.user.js",
         "debug": false,
         "webViewSettings": {
           "blockNetworkImage": true,
