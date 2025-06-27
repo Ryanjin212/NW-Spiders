@@ -123,12 +123,12 @@ console.log(JSON.stringify(GM_info));
                     list: []
                 };
                 let itemList = [];
-                $(".video-img-box").has(".detail").has("img").each(function () {
-                    const url = new URL($(this).find(".img-box a").attr("href"));
+                $(".excerpt-c5").has(".detail").has("img").each(function () {
+                    const url = new URL($(this).find("h2 a").attr("href"));
                     if (url.hostname === "madou.club") {
                         itemList.push({
                     vod_id: url.pathname.split('/').at(2).toUpperCase(),
-                    vod_name: $(this).find(".excerpt.excerpt-c5 h2").text(),
+                    vod_name: $(this).find(".excerpt-c5 h2").text(),
                     vod_pic: $(this).find("img").data("data-src"),
                     vod_year: $(this).find(".absolute-bottom-right").text().trim()
                         })
