@@ -23,7 +23,7 @@ console.log(JSON.stringify(GM_info));
     const GmSpider = (function () {
         function listVideos(result) {
             result.pagecount = parseInt($(".pagination .page-item:last").text());
-            $("[id^='list_videos_'] .row:first .excerpt.excerpt-c5").each(function (i) {
+            $(".excerpts-wrapper .row:first .excerpt.excerpt-c5").each(function (i) {
                 const subTitle = $(this).find(".sub-title").text().split('\n');
                 const remarks = [
                     "👁️" + subTitle[1].trim(),
