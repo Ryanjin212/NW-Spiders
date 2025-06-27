@@ -24,7 +24,7 @@ console.log(JSON.stringify(GM_info));
         function listVideos(result) {
             result.pagecount = parseInt($(".pagination .page-item:last").text());
             $(".excerpts-wrapper .row:first .excerpt-c5").each(function (i) {
-                const subTitle = $(this).find(".sub-title").text().split('\n');
+                const subTitle = $(this).find("footer").text().split('\n');
                 const remarks = [
                     "👁️" + subTitle[1].trim(),
                     "❤️" + subTitle[2].trim()
@@ -33,9 +33,9 @@ console.log(JSON.stringify(GM_info));
                 result.list.push({
                     vod_id: url.pathname.split('/').at(2).toUpperCase(),
                     vod_name: $(this).find(".excerpt-c5 h2").text(),
-                    vod_pic: $(this).find("img").data("data-src"),
+                    vod_pic: $(this).find(".thumb").data("data-src"),
                     vod_remarks: remarks.join(" "),
-                    vod_year: $(this).find(".absolute-bottom-right").text().trim()
+                    vod_year: $(this).find(".post-view").text().trim()
                 })
             });
             return result;
