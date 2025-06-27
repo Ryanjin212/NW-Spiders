@@ -1,11 +1,10 @@
-
 // ==UserScript==
-// @name         MissAV
+// @name         Jable
 // @namespace    gmspider
 // @version      2024.12.03
-// @description  MissAV GMSpider
+// @description  Jable GMSpider
 // @author       Luomo
-// @match        https://missav.*/*
+// @match        https://jable.tv/*
 // @require      https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js
 // @grant        unsafeWindow
 // ==/UserScript==
@@ -17,163 +16,141 @@ console.log(JSON.stringify(GM_info));
         GMSpiderArgs.fName = args.shift();
         GMSpiderArgs.fArgs = args;
     } else {
-        GMSpiderArgs.fName = "detailContent";
+        GMSpiderArgs.fName = "homeContent";
         GMSpiderArgs.fArgs = [true];
     }
     Object.freeze(GMSpiderArgs);
     const GmSpider = (function () {
-        const filter = {
-            key: "filter",
-            name: "过滤",
-            value: [{
-                n: "所有",
-                v: ""
-            }, {
-                n: "单人作品",
-                v: "&filters=individual"
-            }, {
-                n: "多人作品",
-                v: "&filters=multiple"
-            }, {
-                n: "中文字幕",
-                v: "&filters=chinese-subtitle"
-            }]
-        };
-        const filterWithoutSort = [
-            filter
-        ];
-        const defaultFilter = [
-            filter,
-            {
-                key: "sort",
-                name: "排序方式",
-                value: [
-                    {
-                        n: "发行日期",
-                        v: "&sort=released_at"
-                    },
-                    {
-                        n: "最近更新",
-                        v: "&sort=published_at"
-                    },
-                    {
-                        n: "收藏数",
-                        v: "&sort=saved"
-                    },
-                    {
-                        n: "今日浏览数",
-                        v: "&sort=today_views"
-                    },
-                    {
-                        n: "本周浏览数",
-                        v: "&sort=weekly_views"
-                    },
-                    {
-                        n: "本月浏览数",
-                        v: "&sort=monthly_views"
-                    },
-                    {
-                        n: "总浏览数",
-                        v: "&sort=views"
-                    }
-                ]
-            }];
-
-        function pageList(result) {
-            result.pagecount = parseInt($("#price-currency").text().replace(/[^0-9]/ig, ""));
-            result.total = result.pagecount * result.limit;
-            $(".gap-5 .thumbnail").each(function (i) {
+        function listVideos(result) {
+            result.pagecount = parseInt($(".pagination .page-item:last").text());
+            $("[id^='list_videos_'] .row:first .video-img-box").each(function (i) {
+                const subTitle = $(this).find(".sub-title").text().split('\n');
+                const remarks = [
+                    "👁️" + subTitle[1].trim(),
+                    "❤️" + subTitle[2].trim()
+                ];
+                const url = new URL($(this).find(".img-box a").attr("href"));
                 result.list.push({
-                    vod_id: $(this).find(".text-secondary").attr("alt"),
-                    vod_name: $(this).find(".text-secondary").text().trim(),
-                    vod_pic: $(this).find("img").data("src"),
-                    vod_year: $(this).find(".right-1").text().trim(),
-                    vod_remarks: $(this).find(".left-1").text().trim(),
+                    vod_id: url.pathname.split('/').at(2).toUpperCase(),
+                    vod_name: $(this).find(".title").text(),
+                    vod_pic: $(this).find(".img-box img").data("src"),
+                    vod_remarks: remarks.join(" "),
+                    vod_year: $(this).find(".absolute-bottom-right").text().trim()
                 })
             });
             return result;
-        }
-
-        function categoryList(result) {
-            $(".gap-4 div").each(function () {
-                result.list.push({
-                    vod_id: getCategoryFromUrl($(this).find(".text-nord13").attr("href")),
-                    vod_name: $(this).find(".text-nord13").text().trim(),
-                    vod_remarks: $(this).find(".text-nord10 a").text().trim(),
-                    vod_tag: "folder",
-                    style: {
-                        "type": "rect",
-                        "ratio": 2
-                    }
-                })
-            });
-            result.limit = 36;
-            result.pagecount = parseInt($("#price-currency").text().replace(/[^0-9]/ig, ""));
-            result.total = result.pagecount * result.limit;
-            return result;
-        }
-
-        function getCategoryFromUrl(url) {
-            return url.split('/cn/').at(1);
-        }
-
-        function formatDetail(detail, ...keys) {
-            let format = "";
-            for (let key of keys) {
-                format += key in detail ? (Array.isArray(detail[key]) ? detail[key].join(" ") : detail[key]) : "";
-            }
-            return format;
         }
 
         return {
             homeContent: function (filter) {
                 let result = {
                     class: [
-                        {type_id: "new", type_name: "所有影片"},
-                        {type_id: "madou", type_name: "麻豆传媒"},
-                        {type_id: "chinese-subtitle", type_name: "中文字幕"},
-                        {type_id: "uncensored-leak", type_name: "无码流出"},
-                        {type_id: "actresses/ranking", type_name: "热门女优"},
-                        {type_id: "makers", type_name: "发行商"},
-                        {type_id: "genres", type_name: "类型"},
+                        {type_id: "latest-updates", type_name: "最近更新"},
+                        {type_id: "hot", type_name: "热门影片"},
+                        {type_id: "categories/chinese-subtitle", type_name: "中文字幕"},
+                        {type_id: "new-release", type_name: "全新上市"},
+                        {type_id: "categories", type_name: "主题&标签"},
                     ],
                     filters: {
-                        "new": defaultFilter,
-                        "madou": defaultFilter,
-                        "chinese-subtitle": defaultFilter,
-                        "uncensored-leak": defaultFilter,
-                        "actresses/ranking": defaultFilter,
-                        "makers": defaultFilter,
-                        "genres": defaultFilter
+                        hot: [{
+                            key: "sort_by",
+                            name: "时间",
+                            value: [
+                                {
+                                    n: "所有时间",
+                                    v: "&sort_by=video_viewed"
+                                },
+                                {
+                                    n: "本月热门",
+                                    v: "&sort_by=video_viewed_month"
+                                },
+                                {
+                                    n: "本周热门",
+                                    v: "&sort_by=video_viewed_week"
+                                },
+                                {
+                                    n: "今日热门",
+                                    v: "&sort_by=video_viewed_today"
+                                }
+                            ]
+                        }],
+                        "categories/chinese-subtitle": [{
+                            key: "sort_by",
+                            name: "时间",
+                            value: [
+                                {
+                                    n: "近期最佳",
+                                    v: "&sort_by=post_date_and_popularity"
+                                },
+                                {
+                                    n: "最近更新",
+                                    v: "&sort_by=post_date"
+                                },
+                                {
+                                    n: "最多观看",
+                                    v: "&sort_by=video_viewed"
+                                },
+                                {
+                                    n: "最高收藏",
+                                    v: "&sort_by=most_favourited"
+                                }
+                            ]
+                        }],
+                        categories: [{
+                            key: "sort_by",
+                            name: "时间",
+                            value: [
+                                {
+                                    n: "近期最佳",
+                                    v: "&sort_by=post_date_and_popularity"
+                                },
+                                {
+                                    n: "最近更新",
+                                    v: "&sort_by=post_date"
+                                },
+                                {
+                                    n: "最多观看",
+                                    v: "&sort_by=video_viewed"
+                                },
+                                {
+                                    n: "最高收藏",
+                                    v: "&sort_by=most_favourited"
+                                }
+                            ]
+                        }]
                     },
                     list: []
                 };
-                $(".gap-5:eq(5) .thumbnail").each(function () {
-                    result.list.push({
-                        vod_id: $(this).find(".text-secondary").attr("alt"),
-                        vod_name: $(this).find(".text-secondary").text().trim(),
-                        vod_pic: $(this).find("img").data("src"),
-                        vod_year: $(this).find(".absolute").text().trim()
-                    })
+                let itemList = [];
+                $(".video-img-box").has(".detail").has("img").each(function () {
+                    const url = new URL($(this).find(".img-box a").attr("href"));
+                    if (url.hostname === "jable.tv") {
+                        itemList.push({
+                            vod_id: url.pathname.split('/').at(2).toUpperCase(),
+                            vod_name: $(this).find(".title").text(),
+                            vod_pic: $(this).find("img").data("src"),
+                            vod_year: $(this).find(".absolute-bottom-right").text().trim()
+                        })
+                    }
                 });
-                console.log(result);
+                result.list = itemList.filter((item, index) => {
+                    return itemList.findIndex(i => i.vod_id === item.vod_id) === index
+                });
                 return result;
             },
             categoryContent: function (tid, pg, filter, extend) {
                 let result = {
                     list: [],
-                    limit: 12,
-                    total: 0,
-                    page: pg,
-                    pagecount: 0
+                    pagecount: 1
                 };
-                if (tid === "actresses/ranking") {
-                    $(".gap-4 .space-y-4").each(function () {
+                if (tid === "categories") {
+                    $("#list_categories_video_categories_list .video-img-box").each(function () {
+                        const url = new URL($(this).find("a").attr("href")).pathname.split('/');
                         result.list.push({
-                            vod_id: getCategoryFromUrl($(this).find(".space-y-2 a").attr("href")),
-                            vod_name: $(this).find(".truncate").text().trim(),
-                            vod_pic: $(this).find("img").length > 0 ? $(this).find("img").attr("src") : "",
-                            vod_remarks: $(this).find(".text-sm").text().trim(),
+                            vod_id: url[1] + "/" + url[2],
+                            vod_name: $(this).find("h4").text(),
+                            vod_pic: $(this).find("img").attr("src"),
+                            vod_remarks: $(this).find(".absolute-center span").text(),
                             vod_tag: "folder",
                             style: {
                                 "type": "rect",
@@ -181,78 +158,64 @@ console.log(JSON.stringify(GM_info));
                             }
                         })
                     });
-                    result.limit = 100;
-                    result.total = 100;
-                    result.pagecount = 1;
-                } else if (tid === "makers") {
-                    function getNavs(name) {
-                        $("nav.hidden .relative a.group span:contains('" + name + "')").parents(".relative:first").find(".py-1 a").each(function () {
+                    const tags = [];
+                    $(".app-nav .title-box:gt(0)").each(function () {
+                        const remark = $(this).text();
+                        $(this).next(".row").find(".tag").each(function () {
+                            const url = new URL($(this).attr("href")).pathname.split('/');
                             result.list.push({
-                                vod_id: getCategoryFromUrl($(this).attr("href")),
-                                vod_name: $(this).text().trim(),
-                                vod_remarks: name,
+                                vod_id: url[1] + "/" + url[2],
+                                vod_name: $(this).text(),
+                                vod_remarks: remark,
                                 vod_tag: "folder",
-                                style: {
-                                    "type": "rect",
-                                    "ratio": 2
-                                }
                             })
-                        })
-                    }
-
-                    if (pg == 1) {
-                        getNavs("国产 AV");
-                        getNavs("无码影片");
-                        getNavs("素人");
-                    }
-                    result = categoryList(result)
-                } else if (tid === "genres") {
-                    result = categoryList(result)
+                        });
+                    });
+                    result.pagecount = 1;
                 } else {
-                    result = pageList(result);
+                    listVideos(result);
                 }
                 return result;
             },
             detailContent: function (ids) {
-                let detail = {};
-                $(".space-y-2:not(.list-disc) .text-secondary").each(function () {
-                    const key = $(this).find("span:first").text().replace(":", "");
-                    if ($(this).find("a").length === 0) {
-                        detail[key] = $(this).find("span:first").remove().end().text().trim();
-                    } else {
-                        detail[key] = [];
-                        $(this).find("a").each(function () {
-                            const id = getCategoryFromUrl($(this).attr("href"));
-                            const name = $(this).text();
-                            detail[key].push(`[a=cr:{"id":"${id}","name":"${name}"}/]${name}[/a]`);
-                        })
-                    }
+                let vodActor = [], categories = [], tags = [];
+                $(".video-info .info-header .models .model").each(function () {
+                    const url = new URL($(this).attr("href")).pathname.split('/');
+                    const id = url[1] + "/" + url[2];
+                    const name = $(this).find(".rounded-circle").data("original-title");
+                    vodActor.push(`[a=cr:{"id":"${id}","name":"${name}"}/]${name}[/a]`);
                 });
-
-                console.log($('a.items-center:contains("显示更多")'));
+                $(".video-info .tags .cat").each(function () {
+                    const url = new URL($(this).attr("href")).pathname.split('/');
+                    const id = url[1] + "/" + url[2];
+                    const name = $(this).text();
+                    categories.push(`[a=cr:{"id":"${id}","name":"${name}"}/]#${name}[/a]`);
+                });
+                $(".video-info .tags a:not(.cat)").each(function () {
+                    const url = new URL($(this).attr("href")).pathname.split('/');
+                    const id = url[1] + "/" + url[2];
+                    const name = $(this).text();
+                    tags.push(`[a=cr:{"id":"${id}","name":"${name}"}/]#${name}[/a]`);
+                });
                 const vod = {
                     vod_id: ids[0],
                     vod_name: ids[0].toUpperCase(),
-                    vod_pic: $("head link[as=image]").attr("href"),
-                    vod_year: $("#space-y-2 time").text(),
-                    vod_remarks: formatDetail(detail, "类型"),
-                    vod_actor: formatDetail(detail, "女优"),
-                    vod_content: $('a.items-center:contains("显示更多")').length > 0 ? $("head meta[name=description]").attr("content") : $("head meta[property='og:title']").attr("content"),
-                    vod_play_from: "MissAV",
-                    vod_play_url: "多视轨$" + hls.url,
+                    vod_pic: $("#player").attr("poster"),
+                    vod_year: "更新於 " + $(".video-info .info-header .mr-3:first").text() + " " + $(".video-info .info-header .inactive-color").text(),
+                    vod_remarks: tags.join(" "),
+                    vod_actor: vodActor.join(" ") + " " + categories.join(" "),
+                    vod_content: $(".video-info h4").text(),
+                    vod_play_from: $(".video-info .info-header .header-right h6").children().remove().end().text().trim(),
+                    vod_play_url: "1080P$" + unsafeWindow.hlsUrl,
                 };
-                console.log({list: [vod]})
                 return {list: [vod]};
             },
             searchContent: function (key, quick, pg) {
-                let result = {
+                const result = {
                     list: [],
-                    limit: 12,
-                    total: 0,
-                    page: pg,
-                    pagecount: 0
+                    pagecount: 1
                 };
-                result = pageList(result);
+                listVideos(result);
                 return result;
             }
         };
