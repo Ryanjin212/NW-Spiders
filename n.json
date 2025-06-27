@@ -328,60 +328,7 @@
             "loadUrl": "https://xojav.tv/search/${key}/?mode=async&function=get_block&sort_by=most_relevant&from_videos=${pg:-1}"
           }
         }
-      },
-  {
-      "key": "madou",
-      "name": "madou",
-      "type": 3,
-      "quickSearch": 1,
-      "searchable": 1,
-      "changeable": 1,
-      "filterable": 1,
-      "timeout": 60,
-      "style": {
-        "type": "rect",
-        "ratio": 1.48
-      },
-      "api": "csp_GM",
-      "ext": {
-        "userScript": "./userScripts/madou.user.js",
-        "debug": false,
-        "webViewSettings": {
-          "blockNetworkImage": true,
-          "blockList": [
-            "*.ico*",
-            "*.png*",
-            "*.css*",
-            "https://*.adsco.re/*",
-            "https://*.googleapis.com/*",
-            "https://*.googlesyndication.com/*",
-            "https://*.googletagmanager.com/*",
-            "https://*.hpyjmp.com/*",
-            "https://*.magsrv.com/*",
-            "https://*.mnaspm.com/*",
-            "https://*.shukriya90.com/*",
-            "https://*.tapioni.com/*",
-            "https://*.tsyndicate.com/*",
-            "https://assets.jable.tv/assets/js/player.js"
-          ]
-        },
-        "spider": {
-          "homeContent": {
-            "loadUrl": "https://madou.club/"
-          },
-          "categoryContent": {
-            "loadUrl": "https://madou.club/${tid:-latest-updates}/?from=${pg:-1}${sort_by:-}"
-          },
-          "detailContent": {
-            "loadUrl": "https://madou.club/videos/${id}/"
-          },
-          "searchContent": {
-            "loadUrl": "https://madou.club/search/${key}/?from=${pg:-1}"
-          }
-        }
       }
-    },
-      
     }
   ]
 }
