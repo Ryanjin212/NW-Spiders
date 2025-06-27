@@ -8,21 +8,21 @@
 {"key":"麻豆社0","name":"麻豆社0","type":3,"api":"./lib/drpy2.min.js","ext":"./js/madouclub.js","style": {
                 "type": "rect",
                 "ratio": 1.777
-            },"spider":"./Spiders-Lib/pg23a94bb.jar;md5;73b12022e75e5139dc39e9690727021c"
+            }
         },
 {"key":"drpy_js_朱古力0","name":"朱古力0","type":3,"api":"./lib/drpy2.min.js","ext":"./js/朱古力.js","style": {
                 "type": "rect",
                 "ratio": 1.777
-            },"spider":"./Spiders-Lib/pg23a94bb.jar;md5;73b12022e75e5139dc39e9690727021c"
+            }
         },
 	
 {"key":"drpy_js_Missav0","name":"MissAV0","type":3,"api":"./lib/drpy2.min.js","ext":"./js/Missav.js","style": {
                 "type": "rect",
                 "ratio": 1.777
-            },"spider":"./Spiders-Lib/pg23a94bb.jar;md5;73b12022e75e5139dc39e9690727021c"
+            }
         },
 	
-{"key":"Jable0","name":"Jable0","type":3,"api":"csp_Jable","searchable":1,"recordable":0,"timeout":60,"style":{"type":"rect","ratio":1.77},"spider":"./Spiders-Lib/pg23a94bb.jar;md5;73b12022e75e5139dc39e9690727021c"},
+{"key":"Jable0","name":"Jable0","type":3,"api":"csp_Jable","searchable":1,"recordable":0,"timeout":60,"style":{"type":"rect","ratio":1.77}},
 
 {"key":"Hanime","name":"Hanime","type":3,"api":"csp_Hanime","searchable":1,"recordable":0,"style":{"type":"rect","ratio":0.68}},
 	{
@@ -31,10 +31,10 @@
             "type": 1,
             "api": "https://apidanaizi.com/api.php/provide/vod",
             "searchable": 1,
-            "changeable": 1,"spider":"./Spiders-Lib/pg23a94bb.jar;md5;73b12022e75e5139dc39e9690727021c"
+            "changeable": 1
         },
 
-{"name":"91md91麻豆","key":"1191麻豆","type":1,"api":"https://91md.me/api.php/provide/vod/","searchable":1,"quickSearch":1,"filterable":1,"spider":"./Spiders-Lib/pg23a94bb.jar;md5;73b12022e75e5139dc39e9690727021c"},
+{"name":"91md91麻豆","key":"1191麻豆","type":1,"api":"https://91md.me/api.php/provide/vod/","searchable":1,"quickSearch":1,"filterable":1},
     {
       "key": "Jable",
       "name": "Jable",
