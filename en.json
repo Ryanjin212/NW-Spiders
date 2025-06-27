@@ -8,7 +8,7 @@
 {"key":"麻豆社0","name":"麻豆社0","type":3,"api":"./lib/drpy2.min.js","ext":"./js/madouclub.js","style": {
                 "type": "rect",
                 "ratio": 1.777
-            }
+            },"spider":"./Spiders-Lib/pg23a94bb.jar;md5;73b12022e75e5139dc39e9690727021c"
         },
 {"key":"drpy_js_朱古力0","name":"朱古力0","type":3,"api":"./lib/drpy2.min.js","ext":"./js/朱古力.js","style": {
                 "type": "rect",
