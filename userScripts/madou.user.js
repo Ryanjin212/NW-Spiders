@@ -22,7 +22,7 @@ console.log(JSON.stringify(GM_info));
     Object.freeze(GMSpiderArgs);
     const GmSpider = (function () {
         function listVideos(result) {
-            result.pagecount = parseInt($(".pagination .page-item:last").text());
+            result.pagecount = 1;
             $(".excerpts-wrapper .row:first .excerpt-c5").each(function (i) {
                 const subTitle = $(this).find("footer").text().split('\n');
                 const remarks = [
