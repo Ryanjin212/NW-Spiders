@@ -29,11 +29,11 @@ console.log(JSON.stringify(GM_info));
                     "👁️" + subTitle[1].trim(),
                     "❤️" + subTitle[2].trim()
                 ];
-                const url = new URL($(this).find(".img-box a").attr("href"));
+                const url = new URL($(this).find(".excerpt.excerpt-c5 a").attr("href"));
                 result.list.push({
                     vod_id: url.pathname.split('/').at(2).toUpperCase(),
-                    vod_name: $(this).find(".title").text(),
-                    vod_pic: $(this).find(".img-box img").data("src"),
+                    vod_name: $(this).find(".excerpt.excerpt-c5 h2").text(),
+                    vod_pic: $(this).find("img").data("data-src"),
                     vod_remarks: remarks.join(" "),
                     vod_year: $(this).find(".absolute-bottom-right").text().trim()
                 })
