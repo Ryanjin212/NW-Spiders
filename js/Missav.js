@@ -1,5 +1,5 @@
 var rule = {
-    title:'Missav',
+    title:'Missav0',
     host:'https://missav.ai',
 	searchUrl:'/cn/search/**',
     url:'/fyclass?page=fypage',
