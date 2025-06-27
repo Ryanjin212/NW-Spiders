@@ -23,16 +23,16 @@ console.log(JSON.stringify(GM_info));
     const GmSpider = (function () {
         function listVideos(result) {
             result.pagecount = parseInt($(".pagination .page-item:last").text());
-            $(".excerpts-wrapper .row:first .excerpt.excerpt-c5").each(function (i) {
+            $(".excerpts-wrapper .row:first .excerpt-c5").each(function (i) {
                 const subTitle = $(this).find(".sub-title").text().split('\n');
                 const remarks = [
                     "👁️" + subTitle[1].trim(),
                     "❤️" + subTitle[2].trim()
                 ];
-                const url = new URL($(this).find(".excerpt.excerpt-c5 a").attr("href"));
+                const url = new URL($(this).find(".excerpt-c5 a").attr("href"));
                 result.list.push({
                     vod_id: url.pathname.split('/').at(2).toUpperCase(),
-                    vod_name: $(this).find(".excerpt h2").text(),
+                    vod_name: $(this).find(".excerpt-c5 h2").text(),
                     vod_pic: $(this).find("img").data("data-src"),
                     vod_remarks: remarks.join(" "),
                     vod_year: $(this).find(".absolute-bottom-right").text().trim()
