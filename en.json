@@ -194,7 +194,7 @@
         ],
         "spider": {
           "homeContent": {
-            "loadUrl": "https://www1.123av.com/zh/"
+            "loadUrl": "https://www1.123av.com/zh/dm7"
           },
           "categoryContent": {
             "loadUrl": "https://www1.123av.com/zh/${tid}?page=${pg:-1}${filter:-}${sort:-}"
