@@ -32,7 +32,7 @@ console.log(JSON.stringify(GM_info));
                 const url = new URL($(this).find(".excerpt.excerpt-c5 a").attr("href"));
                 result.list.push({
                     vod_id: url.pathname.split('/').at(2).toUpperCase(),
-                    vod_name: $(this).find(".excerpt.excerpt-c5 h2").text(),
+                    vod_name: $(this).find(".excerpt h2").text(),
                     vod_pic: $(this).find("img").data("data-src"),
                     vod_remarks: remarks.join(" "),
                     vod_year: $(this).find(".absolute-bottom-right").text().trim()
@@ -125,12 +125,12 @@ console.log(JSON.stringify(GM_info));
                 let itemList = [];
                 $(".video-img-box").has(".detail").has("img").each(function () {
                     const url = new URL($(this).find(".img-box a").attr("href"));
-                    if (url.hostname === "jable.tv") {
+                    if (url.hostname === "madou.club") {
                         itemList.push({
-                            vod_id: url.pathname.split('/').at(2).toUpperCase(),
-                            vod_name: $(this).find(".title").text(),
-                            vod_pic: $(this).find("img").data("src"),
-                            vod_year: $(this).find(".absolute-bottom-right").text().trim()
+                    vod_id: url.pathname.split('/').at(2).toUpperCase(),
+                    vod_name: $(this).find(".excerpt.excerpt-c5 h2").text(),
+                    vod_pic: $(this).find("img").data("data-src"),
+                    vod_year: $(this).find(".absolute-bottom-right").text().trim()
                         })
                     }
                 });
