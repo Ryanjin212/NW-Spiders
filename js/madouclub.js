@@ -1,5 +1,5 @@
 var rule = {
-    title:'麻豆社',
+    title:'麻豆社0',
     host:'https://madou.club',
     url:'/category/fyclass/page/fypage',
 	homeUrl:'/category/fyclass',
