@@ -94,7 +94,7 @@
             "loadUrl": "https://madou.club/"
           },
           "categoryContent": {
-            "loadUrl": "https://madou.club/${tid:-latest-updates}/?from=${pg:-1}${sort_by:-}"
+            "loadUrl": "https://madou.club/${tid}/page/${pg:-1}${range:-}"
           },
           "detailContent": {
             "loadUrl": "https://madou.club/videos/${id}/"
