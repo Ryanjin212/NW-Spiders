@@ -1,5 +1,5 @@
 var rule = {
-    title:'朱古力',
+    title:'朱古力0',
     host:'https://pigav.com',
     url:'/fyclass/page/fypage',
     headers:{
