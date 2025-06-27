@@ -22,7 +22,6 @@
           "blockNetworkImage": true,
           "blockList": [
             "*.ico*",
-            "*.png*",
             "*.css*",
             "https://*.adsco.re/*",
             "https://*.googleapis.com/*",
