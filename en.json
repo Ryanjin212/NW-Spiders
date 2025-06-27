@@ -194,19 +194,19 @@
         ],
         "spider": {
           "homeContent": {
-            "loadUrl": "https://123av.com/zh/"
+            "loadUrl": "https://www1.123av.com/zh/"
           },
           "categoryContent": {
-            "loadUrl": "https://123av.com/zh/${tid}?page=${pg:-1}${filter:-}${sort:-}"
+            "loadUrl": "https://www1.123av.com/zh/${tid}?page=${pg:-1}${filter:-}${sort:-}"
           },
           "detailContent": {
-            "loadUrl": "https://123av.com/zh/${id}"
+            "loadUrl": "https://www1.123av.com/zh/${id}"
           },
           "playerContent": {
-            "loadUrl": "https://123av.com/zh/${vod_id}"
+            "loadUrl": "https://www1.123av.com/zh/${vod_id}"
           },
           "searchContent": {
-            "loadUrl": "https://123av.com/zh/search?keyword=${key}&page=${pg:-1}"
+            "loadUrl": "https://www1.123av.com/zh/search?keyword=${key}&page=${pg:-1}"
           }
         }
       }
