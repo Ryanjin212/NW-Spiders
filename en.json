@@ -100,7 +100,7 @@
             "loadUrl": "https://madou.club/videos/${id}/"
           },
           "searchContent": {
-            "loadUrl": "https://madou.club/search/${key}/?from=${pg:-1}"
+            "loadUrl": "https://madou.club/?s=${key}"
           }
         }
       }
