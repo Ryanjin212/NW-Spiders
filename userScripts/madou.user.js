@@ -45,11 +45,12 @@ console.log(JSON.stringify(GM_info));
             homeContent: function (filter) {
                 let result = {
                     class: [
-                        {type_id: "latest-updates", type_name: "最近更新"},
-                        {type_id: "hot", type_name: "热门影片"},
-                        {type_id: "categories/chinese-subtitle", type_name: "中文字幕"},
-                        {type_id: "new-release", type_name: "全新上市"},
-                        {type_id: "categories", type_name: "主题&标签"},
+                        {type_id: "麻豆传媒", type_name: "麻豆传媒"},
+                        {type_id: "麻豆番外篇", type_name: "麻豆番外篇"},
+                        {type_id: "麻豆花絮", type_name: "麻豆花絮"},
+                        {type_id: "麻豆传媒#", type_name: "其他原创/企划"},
+                        {type_id: "tags", type_name: "热门标签"},
+                        {type_id: "麻豆传媒#", type_name: "筛选"},
                     ],
                     filters: {
                         hot: [{
